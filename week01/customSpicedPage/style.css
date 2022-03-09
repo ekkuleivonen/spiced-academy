@@ -1,50 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: serif;
 }
-* {
-    box-sizing: border-box;
-}
+
 img {
     max-width: 100%;
     padding: 0px 0;
 }
-.nav-bar {
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    background-color: #ffffff;
-    overflow: hidden;
-    position: sticky;
-    top: 0px;
-}
-.logo {
-    width: 17%;
-    min-width: 175px;
-    float: left;
-}
-.menu {
-    width: 3%;
-    min-width: 40px;
-    height: auto;
-    float: right;
-}
-.hero-section {
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url("/Users/ekkuleivonen/aspartame-code/week01/customSpicedPage/spices.jpg");
-    background-size: cover;
-    background-position: center;
 
-    padding-top: 14%;
-    padding-bottom: 14%;
-}
-.hero-content {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
 h1 {
     width: 100%;
     text-align: center;
@@ -53,49 +20,10 @@ h1 {
     font-style: italic;
 }
 
-.footer {
-    background-color: #666666;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-}
-
-.footer-text {
-    color: #eeeeee;
-}
-
-.benefits-section {
-    background-color: #cccccc;
-    padding-top: 5%;
-    padding-bottom: 5%;
-}
-.benefits-wrapper {
-    text-align: center;
-    width: 90%;
-    margin: 0 auto;
-}
-.benefit-item {
-    display: inline-block;
-    width: 40%;
-    padding: 2%;
-    text-align: left;
-}
-
-.icon {
-    width: 10%;
-    float: left;
-    margin-right: 3%;
-}
-.benefit-text-content {
-    padding-top: 1%;
-    text-align: left;
-    width: 87%;
-    float: right;
-}
 h2 {
     margin: 0%;
 }
+
 p {
     margin: 0%;
 }
@@ -115,4 +43,101 @@ button {
     display: block;
     font-family: serif;
     cursor: pointer;
+}
+
+.nav-bar {
+    width: 100%;
+    position: sticky;
+    top: 0px;
+    background-color: #ffffff;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.nav-bar-contain {
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.logo {
+    width: 17%;
+    min-width: 175px;
+    float: left;
+    cursor: pointer;
+}
+
+.menu {
+    width: 3%;
+    min-width: 40px;
+    height: 100%;
+    float: right;
+    cursor: pointer;
+}
+
+.hero-section {
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("spices.jpg");
+    background-size: cover;
+    background-position: center;
+
+    padding-top: 14%;
+    padding-bottom: 14%;
+}
+
+.hero-content {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benefits-section {
+    background-color: #cccccc;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.benefits-wrapper {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.benefit-item {
+    width: 45%;
+    margin: 2.5%;
+    text-align: left;
+    float: left;
+}
+
+.icon-wrapper {
+    width: 10%;
+    min-width: 40px;
+    padding-right: 2%;
+}
+
+.icon {
+    width: 100%;
+    float: left;
+}
+
+.benefit-text-content {
+    padding-top: 1%;
+    text-align: left;
+    width: 90%;
+    float: right;
+}
+
+.footer {
+    background-color: #666666;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.footer-text {
+    color: #eeeeee;
 }
