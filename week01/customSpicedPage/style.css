@@ -45,6 +45,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.555);
+}
+
 .nav-bar {
     width: 100%;
     position: sticky;
