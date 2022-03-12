@@ -168,7 +168,7 @@ footer {
         font-size: 1.5em;
     }
 }
-
+/*
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #505050;
@@ -197,4 +197,71 @@ footer {
             ),
             url("spices.jpg");
     }
+}
+*/
+
+/* Dark mode for toggle */
+body.dark {
+    background-color: #505050;
+}
+h2.dark {
+    color: #eeeeee;
+}
+p.dark {
+    color: #eeeeee;
+}
+button.dark {
+    background-color: #505050;
+    color: #cc8b00;
+    border: solid 3px #cc8b00;
+}
+header.dark {
+    background-color: #505050;
+}
+.benefits-section.dark {
+    background-color: #505050;
+}
+.hero-section.dark {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url("spices.jpg");
+}
+
+/* Dark mode toggle*/
+.label {
+    width: 50px;
+    height: 26px;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transform: scale(1.5);
+}
+
+.fa-moon-o {
+    color: #cc8b00;
+}
+.fa-sun-o {
+    color: #cc8b00;
+}
+.ball {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #eeeeee;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: all 0.1s linear;
+}
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+.checkbox:checked + .label .ball {
+    transform: translateX(24px);
 }

@@ -2,17 +2,10 @@
 EXERCISE 1
 
 Write a function called each that accepts either an object or an array as its first parameter and a callback as its second parameter.
-
 If the first parameter is an object, it should loop over the object's properties and call the callback for each one.
-
 The property value should be the first parameter passed to the callback and the property name should be the second.
-
-
-
 If the first parameter is an array, it should loop over the array's elements and call the callback for each one.
-
 The array element should be the first parameter passed to the callback and the index should be the second.
-You can test your function with the example below:
 
 */
 
@@ -59,7 +52,7 @@ function reverse(arr) {
 }
 
 console.log(originalArray); // [1, 2, 3, 4, 5, 6]
-console.log(reversedArray); // [6, 5, 4, 3, 2, 1] //SCOPE ISSUE????
+console.log(reversedArray); // [6, 5, 4, 3, 2, 1]
 
 /*
 EXERCISE 3
