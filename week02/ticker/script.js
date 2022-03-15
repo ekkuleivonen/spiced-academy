@@ -4,39 +4,28 @@
     var headlines = document.getElementById("headlines");
     var links = document.getElementsByTagName("A");
     var left = headlines.offsetLeft;
+    var id;
     //listen if hover is taking place
-    ticker.addEventListener("mouseover", shallAnimate, false);
-    ticker.addEventListener("mouseout", shallAnimate, false);
+    ticker.addEventListener("mouseover", pause, false);
+    ticker.addEventListener("mouseout", start, false);
 
-    //function to keep track of the headlines left variable and moves it by one pixel at a time
+    function start() {
+        id = requestAnimationFrame(moveHeadlines);
+    }
 
-    function shallAnimate() {
-        if (!continueTicking) {
-            continueTicking = true;
-            window.requestAnimationFrame(moveHeadlines);
-        } else {
-            continueTicking = false;
-            cancelAnimationFrame(stopId);
-        }
+    function pause() {
+        cancelAnimationFrame(id);
     }
 
     moveHeadlines();
-
     function moveHeadlines() {
-        if (!start || progress > 400) start = timestamp;
-        {
-            left--;
-            //Check if first link is entirely off screen
-            if (left <= -links[0].offsetWidth) {
-                console.log("time to append");
-                //For link question, add its width to the "headlines" left positionto correct for the empty space created
-                left += links[0].offsetWidth;
-                //appendChild it to to end of the "headlines"
-                headlines.appendChild(links[0]);
-            }
-            headlines.style.left = left + "px"; //instead of log --> set the "style.left" left for headlines(container of links)
-
-            stopId = window.requestAnimationFrame(moveHeadlines);
+        left--;
+        if (left <= -links[0].offsetWidth) {
+            console.log("time to append");
+            left += links[0].offsetWidth;
+            headlines.appendChild(links[0]);
         }
+        headlines.style.left = left + "px";
+        id = requestAnimationFrame(moveHeadlines);
     }
 })();
