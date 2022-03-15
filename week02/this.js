@@ -74,7 +74,6 @@ function Countdown(seconds) {
         }
     };
 }
-
 var countdown = new Countdown(5);
 countdown.start();
 
