@@ -40,16 +40,16 @@ function addTextElement() {
     // 3. bring HTML element and text together
     newTextItem.appendChild(elementContent);
 
-    // (optional): add classes
+    // 4. add classes
     newTextItem.classList.add("added-text");
 
-    // 4. Style newTextItem
+    // 5. Style newTextItem
     newTextItem.style.position = "fixed";
     newTextItem.style.left = "20px";
     newTextItem.style.top = "100px";
     newTextItem.style.fontSize = "200px";
     newTextItem.style.zIndex = "2147483647";
 
-    // 5. make item visible by adding it to the document
+    // 6. make item visible by adding it to the document
     document.body.appendChild(newTextItem);
 }

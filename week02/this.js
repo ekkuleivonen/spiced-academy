@@ -67,15 +67,16 @@ Once the countdown starts, it should count down to zero starting with the number
 */
 
 function Countdown(seconds) {
-    this.seconds = seconds;
     this.start = function () {
-        for (var i = seconds; i > 0; i--) {
-            console.log(i);
+        function runningTimer(seconds) {
+            console.log(seconds);
+            if (seconds < 0) {
+                setTimeout(function () {
+                    runningTimer(seconds - 1);
+                }, 1000);
+            }
         }
     };
 }
 var countdown = new Countdown(5);
 countdown.start();
-
-//fix context issue with "this" keyword that occurs with the nested function
-//build start method with prototype?
