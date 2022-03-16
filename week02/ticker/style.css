@@ -6,7 +6,8 @@
 
 body {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: rgb(138, 138, 138);
 }
 
@@ -19,9 +20,6 @@ body {
 }
 
 #headlines {
-    /*
-    Stop links from wrapping
-    */
     position: absolute;
     left: 100%;
     white-space: nowrap;
@@ -31,9 +29,6 @@ body {
 }
 
 #headlines a {
-    /*
-    default state styling for links
-    */
     padding-right: 30px;
     vertical-align: middle;
     color: aliceblue;

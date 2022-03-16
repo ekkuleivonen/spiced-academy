@@ -21,7 +21,7 @@
     function moveHeadlines() {
         left--;
         if (left <= -links[0].offsetWidth) {
-            console.log("time to append");
+            console.log("time to append upper");
             left += links[0].offsetWidth;
             headlines.appendChild(links[0]);
         }

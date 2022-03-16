@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #262626;
+}
+h1 {
+    color: antiquewhite;
+}
+
+h2 {
+    padding: 30px;
+    color: antiquewhite;
+    font-style: italic;
+}
+
+#textArea {
+    border-radius: 20px;
+    margin-top: 20px;
+    border: none;
+    resize: none;
+    padding: 2em;
+    background-color: #262626;
+    box-shadow: inset -1px -1px 3px 1px #383838, inset 1px 1px 3px 1px #000,
+        inset -4px -4px 6px 2px #252525, inset 4px 4px 6px 2px #1d1d1d,
+        inset -7px -7px 16px 5px #252525, inset 7px 7px 16px 5px #181818;
+    color: aliceblue;
+    outline: none;
+    line-height: 1.5em;
+}
