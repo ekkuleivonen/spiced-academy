@@ -34,8 +34,8 @@
     var wholeMenu = document.getElementById("menuPopUp");
     var sideMenu = document.getElementById("sideMenu");
     var exitButton = document.getElementById("exitButton");
-    //TOGGLE MENU ON
 
+    //TOGGLE MENU ON
     menuButton.addEventListener("click", menuOn);
     function menuOn() {
         console.log("menuON");
@@ -47,6 +47,9 @@
     wholeMenu.addEventListener("click", menuOff);
     exitButton.addEventListener("click", menuOff);
     function menuOff(e) {
+        if (e.target == sideMenu) {
+            return;
+        }
         e.stopPropagation();
         wholeMenu.classList.remove("isVisible");
         sideMenu.classList.remove("isVisible");
