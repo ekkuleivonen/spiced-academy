@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(134, 195, 255);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#smallCanvas {
+    border: 3px solid tomato;
+    border-radius: 20px;
+}
+
+#bigCanvas {
+    border: 3px solid tomato;
+    border-radius: 20px;
+}

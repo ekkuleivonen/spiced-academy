@@ -4,7 +4,7 @@ Nest within that element another element that is 50px by 50px in size and has a 
 When the user clicks on the outer element its background color should change to a randomly selected color.
 However, if the user clicks on the inner element, the inner element's background color should change to a randomly selected background color but the outer element's background color should not change at all.*/
 
-    //Store both elements in varables
+    //Store both elements in variables
     var outer = document.getElementById("outer");
     var inner = document.getElementById("inner");
     //set eventlisteners for both elements
