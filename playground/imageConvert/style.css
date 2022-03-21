@@ -8,15 +8,29 @@ body {
     width: 100vw;
     height: 100vh;
     display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.input {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#canvasOne {
+#canvas {
     border: 3px solid tomato;
 }
 
+video {
+    border: 2px solid tomato;
+    background: green;
+    max-width: 250px;
+    height: auto;
+    margin: 20px;
+}
+
 img {
-    max-width: 400px;
+    max-width: 500px;
     height: auto;
 }

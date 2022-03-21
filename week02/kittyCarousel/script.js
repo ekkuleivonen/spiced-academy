@@ -3,8 +3,9 @@
     var carousel = document.getElementById("kitties");
     var images = document.querySelectorAll("#kitties img");
     var dots = document.querySelectorAll("#dots div");
-    var timeOutId;
+    var timeoutId;
     var transitioning = false;
+    var isSwipe = false;
     var currentImg = 0; //variable to keep track on image currently on screen
     //Identify time to move images back to stack 1
     carousel.addEventListener("transitionend", function (e) {
@@ -44,6 +45,17 @@
             clearTimeout(timeoutId);
 
             moveKitties(idx);
+        });
+    });
+    //listen for swipes per image
+    Array.prototype.slice.call(images).forEach(function (img, idx) {
+        img.addEventListener("touchmove", function () {
+            //if transition active --> ignore swipe
+            if (transitioning == true) return;
+            //if image not on screen --> ignore swipe
+            if (idx !== currentImg) return;
+            //check
+            console.log("Swiped on image", img, "with index", idx);
         });
     });
 })();
