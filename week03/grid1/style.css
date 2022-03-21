@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 70px auto 30px;
+}
+header {
+    background-color: rgb(255, 155, 68);
+}
+
+main {
+    background-color: rgb(161, 161, 161);
+}
+
+footer {
+    background-color: rgb(255, 177, 190);
+}
