@@ -12,7 +12,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 20%;
+    width: 60%;
+    max-width: 200px;
     height: 50px;
     position: absolute;
     bottom: 10px;
@@ -24,6 +25,7 @@
     height: 20px;
     border-radius: 50%;
     border: solid 2px white;
+    cursor: pointer;
 }
 #dots div.selected {
     background-color: white;
@@ -44,4 +46,10 @@
 #kitties img.exit {
     transform: translateX(-100%);
     transition: transform 1s;
+}
+
+@media screen and (max-width: 900px) {
+    #kitties {
+        height: 100vh;
+    }
 }

@@ -2,6 +2,7 @@
     //canvas setup
     var canvas = document.getElementById("canvasOne");
     var ctx = canvas.getContext("2d");
+
     var canvasWidth = canvas.width;
     var canvasHeight = canvas.height;
     //grab image
@@ -60,20 +61,76 @@
     }
     //tests
 
+    ctx.font = "bold 12px serif";
+
     for (var i = 0; i < sampleSet.length; i++) {
         var temp = sampleSet[i].calculation();
-        if (temp <= 255 && temp > 200) {
-            ctx.fillStyle = "#FFFFFF";
-        } else if (temp <= 200 && temp > 150) {
-            ctx.fillStyle = "#E0E0E0";
-        } else if (temp <= 150 && temp > 100) {
-            ctx.fillStyle = "#B8B8B8";
-        } else if (temp <= 100 && temp > 50) {
-            ctx.fillStyle = "#666666";
+        ctx.clearRect(
+            sampleSet[i].location[0],
+            sampleSet[i].location[1],
+            sampleWidth,
+            sampleHeight
+        );
+        if (temp <= 255 && temp > 226) {
+            ctx.fillText(
+                " ",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //1 " "
+        } else if (temp <= 226 && temp > 200) {
+            ctx.fillText(
+                ".",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //2 "."
+        } else if (temp <= 200 && temp > 175) {
+            ctx.fillText(
+                ":",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //3 ":"
+        } else if (temp <= 175 && temp > 150) {
+            ctx.fillText(
+                "-",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //4 "-"
+        } else if (temp <= 150 && temp > 125) {
+            ctx.fillText(
+                "=",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //5 "="
+        } else if (temp <= 125 && temp > 100) {
+            ctx.fillText(
+                "+",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //6 "+"
+        } else if (temp <= 100 && temp > 75) {
+            ctx.fillText(
+                "*",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //7 "*"
+        } else if (temp <= 75 && temp > 50) {
+            ctx.fillText(
+                "#",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //8 "#"
         } else if (temp <= 50 && temp > 25) {
-            ctx.fillStyle = "#242424";
+            ctx.fillText(
+                "%",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //9 "%"
         } else if (temp <= 25) {
-            ctx.fillStyle = "#000000";
+            ctx.fillText(
+                "@",
+                sampleSet[i].location[0],
+                sampleSet[i].location[1]
+            ); //10 "@"
         }
         console.log(
             "Brightness: ",
@@ -81,11 +138,12 @@
             "Fillstyle: ",
             ctx.fillStyle
         );
+        /*
         ctx.fillRect(
             sampleSet[i].location[0],
             sampleSet[i].location[1],
             sampleWidth,
             sampleHeight
-        );
+        );*/
     }
 })();
