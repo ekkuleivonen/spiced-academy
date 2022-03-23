@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main {
+    min-width: 400px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+main input {
+    width: 100%;
+    min-height: 25px;
+}
+
+main #results {
+    width: 100%;
+}
+
+.highlight {
+    background-color: black;
+    color: white;
+}
