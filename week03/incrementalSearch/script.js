@@ -5,7 +5,6 @@
     inputField.on("input", function () {
         resultsContainer.show();
         var value = inputField.val();
-        console.log(value);
 
         if (!value) {
             resultsHtml = "";
@@ -18,7 +17,6 @@
         for (var i = 0; i < countries.length; i++) {
             //check if input matches anything on the list
             if (countries[i].toLowerCase().startsWith(value.toLowerCase())) {
-                console.log(countries[i], "starts with ", value);
                 // add each match to an array of matches
                 matches.push(countries[i]);
 
