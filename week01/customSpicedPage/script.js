@@ -54,4 +54,21 @@
         wholeMenu.classList.remove("isVisible");
         sideMenu.classList.remove("isVisible");
     }
+
+    //jquery fade in fade out for modal
+    //grab elements
+    var modal = $(".modal");
+    var exitbtn = $("#modalExit");
+
+    //fade in modal
+    setTimeout(function () {
+        modal.fadeIn();
+        modal.css({
+            display: "flex",
+        });
+    }, 1000);
+
+    exitbtn.on("click", function () {
+        modal.fadeOut();
+    });
 })();
