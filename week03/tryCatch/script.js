@@ -21,3 +21,43 @@ function testJson() {
         pValid.style.display = "none";
     }
 }
+
+//ex2
+
+function askForNumber() {
+    var num = prompt("Please enter a number between 1 and 10");
+    if (num >= 1 && num <= 10 && num == parseInt(num)) {
+        return num;
+    }
+    throw new Error("Bad number");
+}
+translateNumbertoFinnish();
+function translateNumbertoFinnish() {
+    try {
+        var numberToTranslate = askForNumber();
+        if (numberToTranslate == 1) {
+            prompt("yksi");
+        } else if (numberToTranslate == 2) {
+            prompt("kaksi");
+        } else if (numberToTranslate == 3) {
+            prompt("kolme");
+        } else if (numberToTranslate == 4) {
+            prompt("neljä");
+        } else if (numberToTranslate == 5) {
+            prompt("viisi");
+        } else if (numberToTranslate == 6) {
+            prompt("kuusi");
+        } else if (numberToTranslate == 7) {
+            prompt("seitsemän");
+        } else if (numberToTranslate == 8) {
+            prompt("kahdeksan");
+        } else if (numberToTranslate == 9) {
+            prompt("yhdeksän");
+        } else if (numberToTranslate == 10) {
+            prompt("kymmenen");
+        }
+    } catch (err) {
+        prompt(err.message);
+        translateNumbertoFinnish();
+    }
+}
