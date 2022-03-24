@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 220, 175);
+}
+.players {
+    padding: 50px;
+    text-align: center;
+}
+
+.active {
+    border: 2px solid tomato;
+    box-shadow: 0px 0px 10px 0px rgba(255, 100, 100, 0.75);
+}
+
+main {
+    width: 700px;
+    height: 600px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    display: flex;
+    position: relative;
+}
+
+.columnGlow {
+    height: 100%;
+    width: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.columnGlow:hover {
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+.coin {
+    background-color: black;
+    margin: 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.white {
+    background-color: white;
+}
+
+.black {
+    background-color: black;
+}
+
+.tempWhite {
+    position: absolute;
+    margin: 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.tempBlack {
+    position: absolute;
+    margin: 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.finalWhite {
+    margin: 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 1);
+    pointer-events: none;
+}
+
+.finalBlack {
+    margin: 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 1);
+    pointer-events: none;
+}
