@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin: 20px;
+}
+.resultHolder {
+    display: flex;
+}
+
+#valid {
+    margin-left: 0.25em;
+    display: none;
+    color: green;
+    font-weight: 900;
+}
+
+#notValid {
+    margin-left: 0.25em;
+    display: none;
+    color: red;
+    font-weight: 900;
+}
