@@ -33,6 +33,13 @@ Coin.prototype.createDiv = function (coinBelongsTo, currentPlayer) {
     }
 };
 
+//create unassigned Coin objects for the whole board
+for (var r = 0; r < 6; r++) {
+    for (var c = 0; c < 7; c++) {
+        coins.push(new Coin(c, r, null, null));
+    }
+}
+
 //Click on currentPlayer creates a Preorary coin div
 player1.addEventListener("click", createPreDiv);
 player2.addEventListener("click", createPreDiv);
@@ -93,14 +100,21 @@ function placeCoin(e) {
     player1Mid = document.createElement("div");
     player2Mid = document.createElement("div");
     if (e.keyCode == 32) {
-        coins.push(
-            new Coin(
-                columnIndex,
-                coinBelongsTo.childElementCount,
-                currentPlayer,
-                Coin.prototype.createDiv(coinBelongsTo, currentPlayer)
-            )
-        );
+        //update correct coin object with data
+        for (var idx = 0; idx < coins.length; idx++) {
+            if (
+                coins[idx].column == columnIndex &&
+                coins[idx].row == coinBelongsTo.childElementCount
+            ) {
+                coins[idx].currentPlayer = currentPlayer;
+                coins[idx].div = Coin.prototype.createDiv(
+                    coinBelongsTo,
+                    currentPlayer
+                );
+                break;
+            }
+        }
+
         isActive = false;
         if (currentPlayer == "Player 1") {
             player2.classList.remove("notActive");
@@ -132,14 +146,17 @@ function checkRow(row) {
     rowArr.sort((a, b) => {
         return a.column - b.column;
     });
-    var count = 0;
+    var str = "";
     for (var r = 0; r < rowArr.length; r++) {
         if (rowArr[r].currentPlayer == currentPlayer) {
-            count++;
-            if (count == 4) {
-                victory(currentPlayer, rowArr);
-            }
-        } else count = 0;
+            str += "w";
+        } else {
+            str += "l";
+        }
+    }
+    if (str.indexOf("wwww") > -1) {
+        startOfWinningArr = str.indexOf("wwww");
+        victory(currentPlayer, rowArr);
     }
 }
 
@@ -148,15 +165,20 @@ function checkColumn(column) {
     var columnArr = coins.filter((Coin) => {
         return Coin.column === column;
     });
-
-    var count = 0;
+    columnArr.sort((a, b) => {
+        return a.row - b.row;
+    });
+    var str = "";
     for (var c = 0; c < columnArr.length; c++) {
         if (columnArr[c].currentPlayer == currentPlayer) {
-            count++;
-            if (count == 4) {
-                victory(currentPlayer, columnArr);
-            }
-        } else count = 0;
+            str += "w";
+        } else {
+            str += "l";
+        }
+    }
+    if (str.indexOf("wwww") > -1) {
+        startOfWinningArr = str.indexOf("wwww");
+        victory(currentPlayer, columnArr);
     }
 }
 
@@ -183,35 +205,48 @@ function checkDiagonal(colIdx, rowIdx) {
 
     checkDiag1(diag1);
     function checkDiag1(diag1) {
-        var count = 0;
+        var str = "";
         for (var d1 = 0; d1 < diag1.length; d1++) {
             if (diag1[d1].currentPlayer == currentPlayer) {
-                count++;
-                if (count == 4) {
-                    victory(currentPlayer, diag1);
-                }
-            } else count = 0;
+                str += "w";
+            } else {
+                str += "l";
+            }
+        }
+        if (str.indexOf("wwww") > -1) {
+            startOfWinningArr = str.indexOf("wwww");
+            victory(currentPlayer, diag1);
         }
     }
     checkDiag2(diag2);
     function checkDiag2(diag2) {
-        var count = 0;
+        var str = "";
         for (var d2 = 0; d2 < diag2.length; d2++) {
             if (diag2[d2].currentPlayer == currentPlayer) {
-                count++;
-                if (count == 4) {
-                    victory(currentPlayer, diag2);
-                }
-            } else count = 0;
+                str += "w";
+            } else {
+                str += "l";
+            }
+        }
+        if (str.indexOf("wwww") > -1) {
+            startOfWinningArr = str.indexOf("wwww");
+            victory(currentPlayer, diag2);
         }
     }
 }
+
+//Game Over
+var startOfWinningArr;
 var h1 = document.querySelector("h1");
 var helperText = document.querySelector(".instructions p");
 function victory(currentPlayer, winningLine) {
     canPlay = false;
     for (var b = 0; b < winningLine.length; b++) {
-        if (winningLine[b].currentPlayer == currentPlayer) {
+        if (
+            winningLine[b].currentPlayer == currentPlayer &&
+            winningLine.indexOf(winningLine[b]) >= startOfWinningArr &&
+            winningLine.indexOf(winningLine[b]) < startOfWinningArr + 5
+        ) {
             winningLine[b].div.classList.add("victory");
         }
     }
@@ -244,6 +279,12 @@ function resetGame() {
     }
     // empty coins array
     coins = [];
+    //create unassigned Coin objects for the whole board
+    for (var r = 0; r < 6; r++) {
+        for (var c = 0; c < 7; c++) {
+            coins.push(new Coin(c, r, null, null));
+        }
+    }
     //set player status back to normal
     player1.classList.remove("notActive");
     player2.classList.add("notActive");
