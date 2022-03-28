@@ -1,42 +1,48 @@
-(function (countries) {
+(function () {
     var inputField = $("main input");
     var resultsContainer = $("main #results");
+    var inputValue;
+    var matches;
+    var resultsHtml = "";
 
     inputField.on("input", function () {
+        matches = []; // empties the array of matches on every round
+        resultsHtml = "";
         resultsContainer.show();
-        var value = inputField.val();
+        inputValue = inputField.val();
+        console.log(inputValue);
 
-        if (!value) {
+        //safeguard against empty input
+        if (!inputValue) {
             resultsHtml = "";
             resultsContainer.html(resultsHtml); // todo: clear or empty the results container
             return;
         }
 
-        var matches = []; // empties the array of matches on every round
+        //Getting contry data
+        $.ajax({
+            url: "https://spicedworld.herokuapp.com/",
+            data: {
+                q: inputValue,
+            },
+            success: function (data) {
+                console.log(data);
+                matches = data;
+                updateSuggestions();
+            },
+        });
+    });
 
-        for (var i = 0; i < countries.length; i++) {
-            //check if input matches anything on the list
-            if (countries[i].toLowerCase().startsWith(value.toLowerCase())) {
-                // add each match to an array of matches
-                matches.push(countries[i]);
-
-                if (matches.length == 4) {
-                    break; //breaking the loop after 4 results
-                }
-            }
-        }
-
-        var resultsHtml = "";
-
+    function updateSuggestions() {
         if (matches.length > 0) {
             for (var j = 0; j < matches.length; j++) {
                 resultsHtml += "<p>" + matches[j] + "</p>";
             }
             resultsContainer.html(resultsHtml);
         } else {
-            resultsContainer.html("<p>No results</p>"); //todo: show no results message
+            resultsContainer.html("<p>No results</p>"); //show no results message
         }
-    });
+    }
 
     //event delegation allows us to have event listeners for elements that are created dynamcically
     resultsContainer
@@ -95,198 +101,4 @@
         .on("focus", function () {
             resultsContainer.show();
         });
-})([
-    "Afghanistan",
-    "Albania",
-    "Algeria",
-    "Andorra",
-    "Angola",
-    "Antigua and Barbuda",
-    "Argentina",
-    "Armenia",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bhutan",
-    "Bolivia",
-    "Bosnia and Herzegovina",
-    "Botswana",
-    "Brazil",
-    "Brunei Darussalam",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cabo Verde",
-    "Cambodia",
-    "Cameroon",
-    "Canada",
-    "Central African Republic",
-    "Chad",
-    "Chile",
-    "China",
-    "Colombia",
-    "Comoros",
-    "Congo",
-    "Costa Rica",
-    "Côte D'Ivoire",
-    "Croatia",
-    "Cuba",
-    "Cyprus",
-    "Czech Republic",
-    "Democratic People's Republic of Korea",
-    "Democratic Republic of the Congo",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Eritrea",
-    "Estonia",
-    "Eswatini",
-    "Ethiopia",
-    "Fiji",
-    "Finland",
-    "France",
-    "Gabon",
-    "Gambia",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Greece",
-    "Grenada",
-    "Guatemala",
-    "Guinea",
-    "Guinea Bissau",
-    "Guyana",
-    "Haiti",
-    "Honduras",
-    "Hungary",
-    "Iceland",
-    "India",
-    "Indonesia",
-    "Iran",
-    "Iraq",
-    "Ireland",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kiribati",
-    "Kuwait",
-    "Kyrgyzstan",
-    "Lao People’s Democratic Republic",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Marshall Islands",
-    "Mauritania",
-    "Mauritius",
-    "Mexico",
-    "Micronesia",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Morocco",
-    "Mozambique",
-    "Myanmar",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Netherlands",
-    "New Zealand",
-    "Nicaragua",
-    "Niger",
-    "Nigeria",
-    "North Macedonia",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palau",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines",
-    "Poland",
-    "Portugal",
-    "Qatar",
-    "Republic of Korea",
-    "Republic of Moldova",
-    "Romania",
-    "Russian Federation",
-    "Rwanda",
-    "Saint Kitts and Nevis",
-    "Saint Lucia",
-    "Saint Vincent and the Grenadines",
-    "Samoa",
-    "San Marino",
-    "Sao Tome and Principe",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Slovakia",
-    "Slovenia",
-    "Solomon Islands",
-    "Somalia",
-    "South Africa",
-    "South Sudan",
-    "Spain",
-    "Sri Lanka",
-    "Sudan",
-    "Suriname",
-    "Sweden",
-    "Switzerland",
-    "Syrian Arab Republic",
-    "Tajikistan",
-    "Thailand",
-    "Timor-Leste",
-    "Togo",
-    "Tonga",
-    "Trinidad and Tobago",
-    "Tunisia",
-    "Turkey",
-    "Turkmenistan",
-    "Tuvalu",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates",
-    "United Kingdom",
-    "United Republic of Tanzania",
-    "United States of America",
-    "Uruguay",
-    "Uzbekistan",
-    "Vanuatu",
-    "Venezuela",
-    "Viet Nam",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe",
-]);
+})();
