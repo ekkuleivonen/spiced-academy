@@ -7,7 +7,6 @@
 
     inputField.on("input", function () {
         matches = []; // empties the array of matches on every round
-        resultsHtml = "";
         resultsContainer.show();
         inputValue = inputField.val();
         console.log(inputValue);
@@ -26,9 +25,12 @@
                 q: inputValue,
             },
             success: function (data) {
-                console.log(data);
-                matches = data;
-                updateSuggestions();
+                if (inputValue == inputField.val()) {
+                    resultsHtml = "";
+                    console.log(data);
+                    matches = data;
+                    updateSuggestions();
+                }
             },
         });
     });
@@ -92,6 +94,7 @@
             var selected = $("p.highlight").text();
             inputField.val(selected);
             resultsContainer.hide();
+            resultsHtml = "";
         }
     });
     inputField
