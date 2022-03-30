@@ -23,6 +23,16 @@
         searchUrl = "https://spicedify.herokuapp.com/spotify";
     });
 
+    //check for AB test
+    var receivesInfinitescroll;
+    checkAB();
+    function checkAB() {
+        if (location.search.includes("infinitescroll=true")) {
+            receivesInfinitescroll = true;
+        } else receivesInfinitescroll = false;
+        console.log(receivesInfinitescroll);
+    }
+
     //Artist Constructor
     function Artist(artistName, followerCount, imgUrl, externalUrl) {
         this.artistName = artistName;
@@ -93,7 +103,12 @@
                                 "api.spotify.com/v1/search",
                                 "spicedify.herokuapp.com/spotify"
                             );
-                        createNextBtn();
+                        if (!receivesInfinitescroll) {
+                            createNextBtn();
+                        } else {
+                            hasScrolledToBottom = false;
+                            checkScrollPos();
+                        }
                         isNewSearch = false;
                     }
                 }
@@ -129,7 +144,13 @@
                                 "api.spotify.com/v1/search",
                                 "spicedify.herokuapp.com/spotify"
                             );
-                        createNextBtn();
+                        if (!receivesInfinitescroll) {
+                            createNextBtn();
+                        } else {
+                            hasScrolledToBottom = false;
+                            checkScrollPos();
+                        }
+
                         isNewSearch = false;
                     }
                 }
@@ -218,5 +239,21 @@
             getDataFromSpotify();
         });
         resultsSection.append(nextBtn);
+    }
+
+    var hasScrolledToBottom;
+    function checkScrollPos() {
+        var heightOfPage = $(document).height();
+        var heightOfWindow = $(window).height();
+        var scrollPosition = $(document).scrollTop();
+        if (heightOfPage <= scrollPosition + heightOfWindow + 1400) {
+            hasScrolledToBottom = true;
+        }
+        if (hasScrolledToBottom == true) {
+            searchUrl = nextUrl;
+            searchInputValue = "";
+            searchType = "";
+            getDataFromSpotify();
+        } else setTimeout(checkScrollPos, 250);
     }
 })();
