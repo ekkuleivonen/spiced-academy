@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONNECT FOUR</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/ibm-plex-mono" rel="stylesheet">
+    
+</head>
+<body>
+    <aside></aside>
+    <div class="left">
+        <div class="instructions">
+            <h1>Connect Four</h1>
+            <p>Click on player to start, use your mouse to find a position for the coin and release it with the space key.</p>
+        </div>
+        <div class="players">
+            <div id="player1">
+                <div class="player1coin" id="green"></div>
+                <p>Player 1</p>
+            </div>
+            <div id="player2" class="notActive">
+                <div class="player2coin" id="magenta"></div>
+                <p>Player 2</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right">
+        <main>
+            <div class="columnGlow" id="one"></div>
+            <div class="columnGlow" id="two"></div>
+            <div class="columnGlow" id="three"></div>
+            <div class="columnGlow" id="four"></div>
+            <div class="columnGlow" id="five"></div>
+            <div class="columnGlow" id="six"></div>
+            <div class="columnGlow" id="seven"></div>
+            </main>
+            <button id="btn">Reset</button>
+    </div>
+   
+    <script src="script.js"></script>
+</body>
+</html>

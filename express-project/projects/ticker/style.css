@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(138, 138, 138);
+}
+
+#ticker {
+    width: 100%;
+    overflow: hidden;
+    height: 4em;
+    position: relative;
+    background-color: black;
+}
+
+#headlines {
+    position: absolute;
+    left: 100%;
+    white-space: nowrap;
+    height: 4em;
+    display: flex;
+    align-items: center;
+}
+
+#headlines a {
+    padding-right: 30px;
+    vertical-align: middle;
+    color: aliceblue;
+    font-size: 1.2em;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#headlines a:hover {
+    color: hotpink;
+    text-decoration: underline;
+}
