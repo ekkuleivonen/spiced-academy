@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Connect Four",
+        "directory": "connectFour",
+        "image": "connectFour.jpg"
+    },
+    {
+        "title": "Incremental Search",
+        "directory": "incrementalSearch",
+        "image": "incrementalSearch.jpg"
+    },
+    {
+        "title": "Kitty Carousel",
+        "directory": "kittyCarousel",
+        "image": "kittyCarousel.jpg"
+    },
+    {
+        "title": "Spotify Search",
+        "directory": "spotifySearch",
+        "image": "spotifySearch.jpg"
+    },
+    {
+        "title": "Ticker",
+        "directory": "ticker",
+        "image": "ticker.jpg"
+    }
+]

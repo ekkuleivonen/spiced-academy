@@ -3,6 +3,13 @@ const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const basicAuth = require("basic-auth");
+const projects = require("./projects.json");
+
+//========HB BOILER PLATE START=============//
+const { engine } = require("express-handlebars");
+app.engine("handlebars", engine());
+app.set("view engine", "handlebars");
+//========HB BOILER PLATE END=============//
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
@@ -28,16 +35,27 @@ app.use((req, res, next) => {
         res.redirect("/cookies.html");
     } else next();
 });
-//SERVE INDEX.HTML
+
+////SERVE INDEX.HTML
+//app.get("/", (req, res) => {
+//    res.sendFile(path.join(__dirname, "index.html"));
+//});
+
+//RENDER INDEX.HTML
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.render("home", {
+        //layout: null,
+        title: "PORTFOLIO HOME",
+        cohort: "ASPARTAME",
+        projects, // could also do ekkus:ekkus,
+    });
 });
 
 //REQUIRE PASSWORD FOR SPOTIFY SEARCH
 //DEFINE BASIC AUTH
 const auth = function (req, res, next) {
     const creds = basicAuth(req);
-    if (!creds || creds.name != "testuser1" || creds.pass != "testpassword1") {
+    if (!creds || creds.name != "testuser2" || creds.pass != "testpassword2") {
         console.log("SHOW ME YOURSELF");
         res.setHeader(
             "WWW-Authenticate",
@@ -49,8 +67,9 @@ const auth = function (req, res, next) {
     }
 };
 app.use("/SpotifySearch", auth);
-
 //SERVE PROJECTS
 app.use(express.static(path.join(__dirname, "projects")));
+//SERVE PUBLIC
+app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(3000, () => console.log("listening on port 3000..."));
