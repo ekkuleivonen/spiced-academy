@@ -37,8 +37,7 @@ app.get("/", (req, res) => {
 //DEFINE BASIC AUTH
 const auth = function (req, res, next) {
     const creds = basicAuth(req);
-    if (!req.url.includes("SpotifySearch")) return next();
-    if (!creds || creds.name != "testuser" || creds.pass != "testpassword") {
+    if (!creds || creds.name != "testuser1" || creds.pass != "testpassword1") {
         console.log("SHOW ME YOURSELF");
         res.setHeader(
             "WWW-Authenticate",
@@ -49,7 +48,7 @@ const auth = function (req, res, next) {
         next();
     }
 };
-app.use(auth);
+app.use("/SpotifySearch", auth);
 
 //SERVE PROJECTS
 app.use(express.static(path.join(__dirname, "projects")));
