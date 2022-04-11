@@ -1,13 +1,6 @@
-<h1>WELCOME TO MY PORTFOLIO</h1>
-<main>
-
-    {{#projects}}
-        <a href="{{directory}}">
-            <div class="project">
-                <h2>{{title}}</h2>
-                <img src="{{image}}" alt="project screenshot" />
-            </div>
-        </a>
-
-    {{/projects}}
-</main>
+{{#unless preview}}
+{{> projectList}}
+{{/unless}}
+{{#if preview}}
+{{> projectPreview}}
+{{/if}}
