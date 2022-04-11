@@ -1,4 +1,14 @@
-{{log "dir in preview" currentProject}}
-<h1>{{currentProject.title}}</h1>
-<img src="{{currentProject.image}}" alt="project screenshot" />
-<p>{{currentProject.description}}</p>
+<a href="/{{currentProject.directory}}" id="projectPreview">
+    <div>
+        <h1>{{currentProject.title}}</h1>
+        <img src="{{currentProject.image}}" alt="project screenshot" />
+        <p>{{currentProject.description}}</p>
+    </div>
+</a>
+
+<h4>See some of my other projects</h4>
+<ul>
+    {{#filteredProjects}}
+        <li><a href="/preview/{{directory}}">{{title}}</a></li>
+    {{/filteredProjects}}
+</ul>

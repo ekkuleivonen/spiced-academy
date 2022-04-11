@@ -25,3 +25,9 @@ main a {
     max-height: 90%;
     border-radius: 20px;
 }
+
+#projectPreview {
+    text-decoration: none;
+    color: black;
+    margin: 2em;
+}

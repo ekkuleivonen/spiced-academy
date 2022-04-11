@@ -4,12 +4,9 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const basicAuth = require("basic-auth");
 const projects = require("./projects.json");
-const fs = require("fs");
 
 //========HB BOILER PLATE START=============//
 const { engine } = require("express-handlebars");
-const { response } = require("express");
-const { lstat } = require("fs");
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 //========HB BOILER PLATE END=============//
@@ -55,16 +52,18 @@ app.get("/", (req, res) => {
 });
 
 //ROUTE FOR PREVIEW PARTIALS
-app.get("/views/:directory", (req, res) => {
+app.get("/preview/:directory", (req, res) => {
     const directory = req.params.directory;
 
     const foundDirectory = projects.find((x) => x.directory === directory);
-    console.log("found Dir", foundDirectory);
-
+    const filteredProjects = projects.filter(function (project) {
+        if (project.directory !== foundDirectory.directory) return project;
+    });
+    //const currentProjHref = ;
     res.render("home", {
         currentProject: foundDirectory,
         preview: true,
-        projects,
+        filteredProjects,
     });
 });
 
