@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: aqua;
+}
+
+h1 {
+    padding: 10px;
+}
+
+.result {
+    padding: 20px;
+    margin: 5px;
+    border: solid 2px black;
+}
