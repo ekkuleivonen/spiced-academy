@@ -1,9 +1,9 @@
-const getTweets = require("./twitter.js");
 const express = require("express");
-const app = express();
-//const sampleTweets = require("./tweets_sample.json");
+const { getToken, getTweets } = require("./twitter.js");
 
-const screen_name = "TheOnion";
+const app = express();
+
+const screen_names = ["TheOnion", "TelegraphNews", "CNBC"];
 
 function formatData(tweetData) {
     return tweetData
@@ -12,16 +12,40 @@ function formatData(tweetData) {
             return {
                 text: tw.full_text.split("http")[0].trim(),
                 url: tw.entities.urls[0].url,
+                account: tw.user.screen_name,
             };
         });
 }
 
 app.get("/tweets.json", (req, res) => {
-    getTweets(screen_name)
-        .then(function (tweetData) {
-            res.json(formatData(tweetData));
+    getToken()
+        .then((token) => {
+            //Find tweets from all sources
+            Promise.all([
+                getTweets(screen_names[0]),
+                getTweets(screen_names[1]),
+                getTweets(screen_names[2]),
+            ])
+                .then((tweetData) => {
+                    //Combine and sort tweetData
+                    const combinedTweetData = [
+                        ...tweetData[0],
+                        ...tweetData[1],
+                        ...tweetData[2],
+                    ];
+                    const sortedTweetData = combinedTweetData.sort((a, b) => {
+                        return new Date(b.created_at) - new Date(a.created_at);
+                    });
+                    //Filter and serve tweetData
+                    res.json(formatData(sortedTweetData));
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.sendStatus(500);
+                    return;
+                });
         })
-        .catch(function (error) {
+        .catch((error) => {
             console.log(error);
             res.sendStatus(500);
             return;

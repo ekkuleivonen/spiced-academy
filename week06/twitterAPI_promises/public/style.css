@@ -14,4 +14,11 @@ h1 {
     padding: 20px;
     margin: 5px;
     border: solid 2px black;
+    position: relative;
+}
+
+.account {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
 }

@@ -55,15 +55,15 @@ function getToken() {
     });
 }
 
-function getTweets(screen_name) {
+function getTweets(screen_names) {
     return new Promise(function (resolve, reject) {
         getToken().then(function (foundToken) {
             //give foundToken to the tweet request below
-            console.log("LOOK AT MY TOKEN", foundToken);
+            //console.log("LOOK AT MY TOKEN", foundToken);
             makeRequest({
                 method: "GET",
                 host: "api.twitter.com",
-                path: `/1.1/statuses/user_timeline.json?screen_name=${screen_name}&tweet_mode=extended&exclude_replies=true`,
+                path: `/1.1/statuses/user_timeline.json?screen_name=${screen_names}&tweet_mode=extended&exclude_replies=true`,
                 headers: {
                     Authorization: `${foundToken.token_type} ${foundToken.access_token}`,
                 },
@@ -86,4 +86,7 @@ function getTweets(screen_name) {
 //        console.log(error);
 //    });
 
-module.exports = getTweets;
+module.exports = {
+    getTweets,
+    getToken,
+};

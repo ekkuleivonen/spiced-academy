@@ -8,18 +8,22 @@ $.ajax({
             const resultDiv = document.createElement("div");
             const resultText = document.createElement("p");
             const resultLink = document.createElement("a");
+            const accountName = document.createElement("p");
             //set classes for the elements
             resultDiv.classList.add("result");
             resultText.classList.add("content");
             resultLink.classList.add("link");
+            accountName.classList.add("account");
             //place data in the elements
             resultText.innerText = data[i].text;
             resultLink.innerText = data[i].url;
             resultLink.href = data[i].url;
+            accountName.innerText = data[i].account;
             //append elements
             document.body.append(resultDiv);
             resultDiv.append(resultText);
             resultDiv.append(resultLink);
+            resultDiv.append(accountName);
         }
     },
 });
