@@ -1,52 +1,34 @@
-const { CLIENT_ID, CLIENT_SECRET } = require("./secrets.json");
 const { TwitterApi } = require("twitter-api-v2");
+const { CLIENT_ID, CLIENT_SECRET } = require("./secrets.json");
 
-const { writeFile } = require("fs"); //only here to emulate session storage
-
+const CALLBACK_URL = "http://www.localhost:3001/auth/twitter/callback";
 const client = new TwitterApi({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
 });
 
-const CALLBACK_URL = "http://www.localhost:3000/auth/twitter/callback";
-const permissionScope = [
-    "tweet.read",
-    "users.read",
-    "offline.access",
-    "tweet.write",
-];
-
-module.exports.sendUserToAuth = () => {
+module.exports.generateTwitterLink = () => {
     const { url, codeVerifier, state } = client.generateOAuth2AuthLink(
         CALLBACK_URL,
-        { scope: permissionScope }
+        { scope: ["tweet.read", "users.read", "offline.access"] }
     );
-    const sessionInfo = {
-        codeVerifier: codeVerifier,
-        state: state,
-    };
-    writeFile("session.json", JSON.stringify(sessionInfo), "utf-8", (err) => {
-        if (err)
-            console.log("An error occured while writing JSON Object to File.");
-    });
-
-    return url;
+    return { url: url, codeVerifier: codeVerifier, state: state };
 };
 
-module.exports.obtainAccessToken = async (
+module.exports.getAccessToken = async (
+    state,
     code,
     codeVerifier,
-    state,
     sessionState
 ) => {
     if (!codeVerifier || !state || !sessionState || !code) {
-        throw "You denied the app or your session expired!";
+        throw "User denied the app or session expired!";
     }
     if (state !== sessionState) {
         throw "Stored tokens didnt match!";
     }
 
-    const currentClient = await client
+    return client
         .loginWithOAuth2({ code, codeVerifier, redirectUri: CALLBACK_URL })
         .then(
             async ({
@@ -55,21 +37,23 @@ module.exports.obtainAccessToken = async (
                 refreshToken,
                 expiresIn,
             }) => {
-                const clientObj = {
-                    client: await loggedClient.v2.me(),
-                    accessToken: accessToken,
+                // {loggedClient} is an authenticated client in behalf of some user
+                // Store {accessToken} somewhere, it will be valid until {expiresIn} is hit.
+                // If you want to refresh your token later, store {refreshToken} (it is present if 'offline.access' has been given as scope)
+
+                // Example request
+                const { data: userObject } = await loggedClient.v2.me();
+                console.log(userObject, accessToken);
+                const clientSummary = {
+                    twitter_username: userObject.username,
+                    token: accessToken,
                     refreshToken: refreshToken,
                     expiresIn: expiresIn,
                 };
-                return clientObj;
+                return clientSummary;
             }
         )
-        .catch((err) => {
-            if (err) throw "Invalid verifier or access tokens!";
+        .catch(() => {
+            throw "Invalid verifier or access tokens!";
         });
-    return currentClient;
 };
-
-// Don't forget to specify 'offline.access' in scope list if you want to refresh your token later
-
-// Redirect your user to {url}, store {state} and {codeVerifier} into a DB/Redis/memory after user redirection
